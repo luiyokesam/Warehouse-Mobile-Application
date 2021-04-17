@@ -8,7 +8,8 @@
     android:layout_marginStart="5dp"
     android:layout_marginEnd="5dp"
     android:padding="12dp"
-    android:background="@drawable/background_recycler">
+    android:background="@drawable/background_recycler"
+    android:id="@+id/stockin_rowlayout">
 
     <TextView
         android:id="@+id/txt_rv_stockin_barcode"
