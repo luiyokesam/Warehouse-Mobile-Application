@@ -7,89 +7,43 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.warehousemobileapplication.data.ProductViewModel
 import com.example.warehousemobileapplication.databinding.FragmentItemListBinding
+import kotlinx.android.synthetic.main.fragment_item_list.view.*
 
 class ItemListFragment : Fragment() {
-    private var _binding: FragmentItemListBinding? = null
-    private val binding get() = _binding!!
 
-//    private val adapter = ProductAdapter()
-
-//    private lateinit var viewModel: ProductViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        /*setStyle(STYLE_NO_TITLE, android.R.style.Theme_DeviceDefault_Light_Dialog_MinWidth)*/
-    }
+    private lateinit var mProductViewModel: ProductViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        _binding = FragmentItemListBinding.inflate(inflater, container, false)
-//        viewModel = ViewModelProviders.of(this).get(ProductViewModel::class.java)
 
-        return binding.root
-    }
+        val view = inflater.inflate(R.layout.fragment_item_list, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val adapter = ItemListAdapter()
+        val recyclerView = view.recycler_view_products
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        //return binding.root
+        mProductViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
+        mProductViewModel.readAllData.observe(viewLifecycleOwner, Observer { product ->
+            adapter.setData(product)
+        })
 
-//        binding.recyclerViewProducts.adapter = adapter
-
-        binding.addProductButton.setOnClickListener{
-            Navigation.findNavController(view).navigate(R.id.action_itemListFragment_to_itemListDetailsFragment)
+        view.add_ProductButton.setOnClickListener {
+            findNavController().navigate(R.id.action_itemListFragment_to_itemListDetailsFragment)
         }
 
-//        viewModel.product.observe(viewLifecycleOwner, Observer {
-//            adapter.addProduct(it)
-//        })
-
-//        viewModel.getRealtimeUpdate()
-
-//        val itemTouchHelper = ItemTouchHelper(simpleCallback)
-//        itemTouchHelper.attachToRecyclerView(binding.recyclerViewProducts)
-
+        return  view
     }
-//
-//    private var simpleCallback = object : ItemTouchHelper.SimpleCallback(0,
-//        ItemTouchHelper.LEFT.or(ItemTouchHelper.RIGHT)){
-//        override fun onMove(
-//            recyclerView: RecyclerView,
-//            viewHolder: RecyclerView.ViewHolder,
-//            target: RecyclerView.ViewHolder
-//        ): Boolean {
-//            return true
-//        }
-//
-//        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-//            var positions = viewHolder.adapterPosition
-//            var currentProduct = adapter.products[positions]
-//
-//            when(direction){
-//                ItemTouchHelper.RIGHT -> {
-//
-//                }
-//                ItemTouchHelper.LEFT -> {
-//                    AlertDialog.Builder(requireContext()).also {
-//                        it.setTitle("Are you sure you want to delete this product")
-//                        it.setPositiveButton("Yes"){ dialog, which ->
-//                            viewModel.deleteProduct(currentProduct)
-//                            binding.recyclerViewProducts.adapter?.notifyItemRemoved(positions)
-//                            Toast.makeText(context, "Product has been deleted", Toast.LENGTH_SHORT).show()
-//                        }
-//                    }.create().show()
-//                }
-//            }
-//            binding.recyclerViewProducts.adapter?.notifyDataSetChanged()
-//        }
-//
-//    }
-//
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        _binding = null
-//    }
+
 }
+
