@@ -76,6 +76,9 @@
         <action
             android:id="@+id/action_itemListFragment_to_itemListDetailsFragment"
             app:destination="@id/itemListDetailsFragment" />
+        <action
+            android:id="@+id/action_itemListFragment_to_itemListUpdateFragment"
+            app:destination="@id/itemListUpdateFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemListDetailsFragment"
@@ -94,5 +97,17 @@
         <action
             android:id="@+id/action_warehouseFragment_to_nav_home"
             app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemListUpdateFragment"
+        android:name="com.example.warehousemobileapplication.ItemListUpdateFragment"
+        android:label="fragment_item_list_update"
+        tools:layout="@layout/fragment_item_list_update" >
+        <action
+            android:id="@+id/action_itemListUpdateFragment_to_itemListFragment"
+            app:destination="@id/itemListFragment" />
+        <argument
+            android:name="currentProduct"
+            app:argType="com.example.warehousemobileapplication.data.Product" />
     </fragment>
 </navigation>

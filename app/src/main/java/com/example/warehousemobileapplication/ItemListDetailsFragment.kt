@@ -1,81 +1,65 @@
 package com.example.warehousemobileapplication
 
+import android.nfc.tech.NfcBarcode
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import com.example.warehousemobileapplication.data.Product
+import com.example.warehousemobileapplication.data.ProductViewModel
 import com.example.warehousemobileapplication.databinding.FragmentItemListDetailsBinding
+import kotlinx.android.synthetic.main.fragment_item_list_details.*
+import kotlinx.android.synthetic.main.fragment_item_list_details.view.*
+import kotlinx.android.synthetic.main.recyclerview_stockin.*
 
 class ItemListDetailsFragment : Fragment() {
 
-    private var _binding: FragmentItemListDetailsBinding? = null
-    private  val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private  lateinit var mProductViewModel: ProductViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentItemListDetailsBinding.inflate(inflater, container, false)
+    ): View {
 
-//        viewModel = ViewModelProviders.of(this).get(ProductViewModel::class.java)
-        return binding.root
+        val view = inflater.inflate(R.layout.fragment_item_list_details, container, false)
+        mProductViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
+
+        view.btn_addproduct_add.setOnClickListener {
+            insertDataToDatabase()
+        }
+
+        return  view
+   }
+
+    private fun insertDataToDatabase() {
+        val barcode = txt_addproduct_barcode.text.toString()
+        val productName = txt_addproduct_pname.text.toString()
+        val companyName = txt_addproduct_cname.text.toString()
+        val productType = txt_addproduct_ptype.text.toString()
+        val productPrice = txt_addproduct_pprice.text.toString()
+
+        if (inputCheck(barcode,productName,companyName,productType,productPrice)){
+
+            val product = Product(0, barcode, productName, companyName, productType, productPrice)
+
+            mProductViewModel.addProduct(product)
+            Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_SHORT).show()
+
+            findNavController().navigate(R.id.action_itemListDetailsFragment_to_itemListFragment)
+        }else{
+            Toast.makeText(requireContext(),"Please fill out  all fields", Toast.LENGTH_LONG).show()
+        }
     }
 
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//
-//        viewModel.result.observe(viewLifecycleOwner, Observer {
-//            val message = if (it == null){
-//                getString(R.string.added_product)
-//            }else{
-//                getString(R.string.error, it.message)
-//            }
-//            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-//        })
-//
-//        binding.btnAddproductAdd.setOnClickListener {
-//            val barcode = binding.txtAddproductBarcode.text.toString().trim()
-//            val productName = binding.txtAddproductPname.text.toString().trim()
-//            val companyName = binding.txtAddproductCname.text.toString().trim()
-//            val productType = binding.txtAddproductPtype.text.toString().trim()
-//            val productPrice = binding.txtAddproductPprice.text.toString().trim()
-//
-//            if(barcode.isEmpty()){
-//                binding.txtAddproductBarcode.error = "This field is required"
-//                return@setOnClickListener
-//            }
-//            if(productName.isEmpty()){
-//                binding.txtAddproductPname.error = "This field is required"
-//                return@setOnClickListener
-//            }
-//            if(companyName.isEmpty()){
-//                binding.txtAddproductCname.error = "This field is required"
-//                return@setOnClickListener
-//            }
-//            if(productType.isEmpty()){
-//                binding.txtAddproductPtype.error = "This field is required"
-//                return@setOnClickListener
-//            }
-//            if(productPrice.isEmpty()){
-//                binding.txtAddproductPprice.error = "This field is required"
-//                return@setOnClickListener
-//            }
-//
-//            val product = Product()
-//            product.barcode = barcode
-//            product.productName = productName
-//            product.companyName = companyName
-//            product.productType = productType
-//            product.productPrice = productPrice
-//
-//            viewModel.addProduct(product)
-//        }
-//    }
+    private fun inputCheck(barcode: String, productName: String, companyName: String, productType: String, productPrice: String): Boolean{
+        return !(TextUtils.isEmpty(barcode) && TextUtils.isEmpty(productName) && TextUtils.isEmpty(companyName) && TextUtils.isEmpty(productName) && TextUtils.isEmpty(productType) && TextUtils.isEmpty(productPrice))
+    }
+    
 }
