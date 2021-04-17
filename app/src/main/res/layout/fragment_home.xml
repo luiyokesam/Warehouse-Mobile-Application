@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".HomeFragment">
+
+    <data>
+        <variable
+            name="homeFragment"
+            type="com.example.warehousemobileapplication.ui.home.HomeFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_test">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_home_stockin"
+            android:onClick="@{()-> homeFragment.navigate(1)}"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="100dp"
+            android:text="Stock-In"
+            app:backgroundTint="@android:color/holo_blue_bright"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_pick_list"
+            app:iconGravity="top"
+            app:iconSize="70dp"
+            app:iconTint="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_home_stockout"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="40dp"
+            android:text="Stock-Out"
+            app:backgroundTint="@android:color/holo_blue_bright"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_purchase"
+            app:iconGravity="top"
+            app:iconSize="70dp"
+            app:iconTint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_home_itemlist"
+            android:onClick="@{()-> homeFragment.navigate(3)}"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="40dp"
+            android:text="Item List"
+            app:backgroundTint="@android:color/holo_blue_bright"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_item_list"
+            app:iconGravity="top"
+            app:iconSize="70dp"
+            app:iconTint="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/btn_home_stockin"
+            app:layout_constraintTop_toBottomOf="@+id/btn_home_stockin" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_home_warehouse"
+            android:onClick="@{()-> homeFragment.navigate(4)}"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="40dp"
+            android:text="Warehouse"
+            app:backgroundTint="@android:color/holo_blue_bright"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_warehouse"
+            app:iconGravity="top"
+            app:iconSize="70dp"
+            app:iconTint="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/btn_home_stockout"
+            app:layout_constraintTop_toBottomOf="@+id/btn_home_stockout" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_home_user"
+            android:onClick="@{()-> homeFragment.navigate(5)}"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="40dp"
+            android:text="User"
+            app:backgroundTint="@android:color/holo_blue_bright"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_supplier"
+            app:iconGravity="top"
+            app:iconSize="70dp"
+            app:iconTint="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/btn_home_itemlist"
+            app:layout_constraintTop_toBottomOf="@+id/btn_home_itemlist" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_home_report"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="40dp"
+            android:text="Report"
+            app:backgroundTint="@android:color/holo_blue_bright"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_report"
+            app:iconGravity="top"
+            app:iconSize="70dp"
+            app:iconTint="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/btn_home_warehouse"
+            app:layout_constraintTop_toBottomOf="@+id/btn_home_warehouse" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
