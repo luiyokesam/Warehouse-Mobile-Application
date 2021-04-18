@@ -1,8 +1,6 @@
 package com.example.warehousemobileapplication
 
-import android.nfc.tech.NfcBarcode
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,31 +8,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.warehousemobileapplication.data.Product
 import com.example.warehousemobileapplication.data.ProductViewModel
-import com.example.warehousemobileapplication.databinding.FragmentItemListDetailsBinding
 import kotlinx.android.synthetic.main.fragment_item_list_details.*
 import kotlinx.android.synthetic.main.fragment_item_list_details.view.*
-import kotlinx.android.synthetic.main.recyclerview_stockin.*
 
 class ItemListDetailsFragment : Fragment() {
-
     private  lateinit var mProductViewModel: ProductViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
+        //save inflated view to fragmentBinding
         val view = inflater.inflate(R.layout.fragment_item_list_details, container, false)
         mProductViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
 
         view.btn_addproduct_add.setOnClickListener {
             insertDataToDatabase()
         }
-
         return  view
    }
 
@@ -61,5 +54,4 @@ class ItemListDetailsFragment : Fragment() {
     private fun inputCheck(barcode: String, productName: String, companyName: String, productType: String, productPrice: String): Boolean{
         return !(TextUtils.isEmpty(barcode) && TextUtils.isEmpty(productName) && TextUtils.isEmpty(companyName) && TextUtils.isEmpty(productName) && TextUtils.isEmpty(productType) && TextUtils.isEmpty(productPrice))
     }
-    
 }

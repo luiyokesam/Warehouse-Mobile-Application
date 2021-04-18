@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.warehousemobileapplication.R
 import com.example.warehousemobileapplication.data.Product
 import com.example.warehousemobileapplication.data.ProductViewModel
 import kotlinx.android.synthetic.main.fragment_item_list_update.*

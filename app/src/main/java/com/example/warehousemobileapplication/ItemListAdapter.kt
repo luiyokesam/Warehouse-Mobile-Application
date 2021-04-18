@@ -4,13 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.warehousemobileapplication.data.Product
 import kotlinx.android.synthetic.main.recyclerview_itemlist.view.*
 
 class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.MyViewHolder>() {
-
     private var productList = emptyList<Product>()
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -32,7 +30,6 @@ class ItemListAdapter: RecyclerView.Adapter<ItemListAdapter.MyViewHolder>() {
         holder.itemView.item_list_row_layout.setOnClickListener {
             val action = ItemListFragmentDirections.actionItemListFragmentToItemListUpdateFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
-
         }
     }
 

@@ -1,19 +1,19 @@
-package com.example.warehousemobileapplication.data
+package com.example.warehousemobileapplication.ui.stockin
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Product::class], version = 1, exportSchema = false)
-abstract class ProductDatabase: RoomDatabase() {
-    abstract fun productDao(): ProductDao
+@Database(entities = [StockIn::class], version = 1, exportSchema = false)
+abstract class StockInDatabase: RoomDatabase() {
+    abstract fun stockinDao(): StockInDao
 
     companion object {
         @Volatile
-        private var INSTANCE: ProductDatabase? = null
+        private var INSTANCE: StockInDatabase? = null
 
-        fun getDatabase(context: Context): ProductDatabase{
+        fun getDatabase(context: Context): StockInDatabase {
             val tempInstance = INSTANCE
             if(tempInstance != null){
                 return tempInstance
@@ -21,8 +21,8 @@ abstract class ProductDatabase: RoomDatabase() {
             synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    ProductDatabase::class.java,
-                    "product_database"
+                    StockInDatabase::class.java,
+                    "stockin_database"
                 ).build()
                 INSTANCE = instance
                 return instance

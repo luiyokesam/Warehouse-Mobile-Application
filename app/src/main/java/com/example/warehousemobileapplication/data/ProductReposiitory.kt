@@ -3,7 +3,6 @@ package com.example.warehousemobileapplication.data
 import androidx.lifecycle.LiveData
 
 class ProductReposiitory(private val productDao: ProductDao) {
-
     val readAllData : LiveData<List<Product>> = productDao.realAllData()
 
     suspend fun addProduct(product: Product){
@@ -20,5 +19,4 @@ class ProductReposiitory(private val productDao: ProductDao) {
     suspend fun deleteAllProduct(){
         productDao.deleteAllProduct()
     }
-
 }

@@ -8,7 +8,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProductViewModel(application: Application): AndroidViewModel(application) {
-
     val readAllData: LiveData<List<Product>>
     private val repository: ProductReposiitory
 
@@ -16,8 +15,6 @@ class ProductViewModel(application: Application): AndroidViewModel(application) 
         val productDao = ProductDatabase.getDatabase(application).productDao()
         repository = ProductReposiitory(productDao)
         readAllData = repository.readAllData
-
-
     }
 
     fun addProduct(product: Product){

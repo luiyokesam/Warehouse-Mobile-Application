@@ -64,6 +64,9 @@
         <action
             android:id="@+id/action_stockInDetailsFragment_to_stockInFragment"
             app:destination="@id/stockInFragment" />
+        <argument
+            android:name="currentStockIn"
+            app:argType="com.example.warehousemobileapplication.ui.stockin.StockIn" />
     </fragment>
     <fragment
         android:id="@+id/itemListFragment"
