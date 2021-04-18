@@ -2,6 +2,7 @@ package com.example.warehousemobileapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -53,14 +54,11 @@ class StockInDetailsFragment : Fragment() {
 
     private fun insertDataToDatabase() {
         val barcode = txt_stockin_code.text.toString()
-//        val inquantity = parseInt(txt_stockin_quantity.text.toString())
         val inquantity = txt_stockin_quantity.text
         val indate = txt_stockin_date.text.toString()
-//        val productType = txt_addproduct_ptype.text.toString()
-//        val productPrice = txt_addproduct_pprice.text.toString()
 
         if (inputCheck(barcode,inquantity,indate)){
-            val stockin = StockIn(0, barcode, inquantity, indate)
+            val stockin = StockIn(0, barcode, Integer.parseInt(inquantity.toString()), indate)
             mStockInViewModel.addStockIn(stockin)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_stockInDetailsFragment_to_stockInFragment)
@@ -69,8 +67,8 @@ class StockInDetailsFragment : Fragment() {
         }
     }
 
-    private fun inputCheck(barcode: String, inquantity: String, indate: String): Boolean{
-        return !(TextUtils.isEmpty(barcode) && TextUtils.isEmpty(inquantity) && TextUtils.isEmpty(indate))
+    private fun inputCheck(barcode: String, inquantity: Editable, indate: String): Boolean{
+        return !(TextUtils.isEmpty(barcode) && inquantity.isEmpty() && TextUtils.isEmpty(indate))
     }
 
     lateinit var btnBarcode: ImageButton

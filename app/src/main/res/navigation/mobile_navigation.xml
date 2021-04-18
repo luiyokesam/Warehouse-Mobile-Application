@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_stockInFragment_to_stockInDetailsFragment"
             app:destination="@id/stockInDetailsFragment" />
+        <action
+            android:id="@+id/action_stockInFragment_to_stockInTransferFragment"
+            app:destination="@id/stockInTransferFragment" />
     </fragment>
     <fragment
         android:id="@+id/stockInDetailsFragment"
@@ -64,9 +67,6 @@
         <action
             android:id="@+id/action_stockInDetailsFragment_to_stockInFragment"
             app:destination="@id/stockInFragment" />
-        <argument
-            android:name="currentStockIn"
-            app:argType="com.example.warehousemobileapplication.ui.stockin.StockIn" />
     </fragment>
     <fragment
         android:id="@+id/itemListFragment"
@@ -112,5 +112,17 @@
         <argument
             android:name="currentProduct"
             app:argType="com.example.warehousemobileapplication.data.Product" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockInTransferFragment"
+        android:name="com.example.warehousemobileapplication.StockInTransferFragment"
+        android:label="fragment_stock_in_transfer"
+        tools:layout="@layout/fragment_stock_in_transfer" >
+        <action
+            android:id="@+id/action_stockInTransferFragment_to_stockInFragment2"
+            app:destination="@id/stockInFragment" />
+        <argument
+            android:name="currentStockIn"
+            app:argType="com.example.warehousemobileapplication.ui.stockin.StockIn" />
     </fragment>
 </navigation>

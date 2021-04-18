@@ -13,7 +13,6 @@ import com.example.warehousemobileapplication.data.ProductViewModel
 import kotlinx.android.synthetic.main.fragment_item_list.view.*
 
 class ItemListFragment : Fragment() {
-
     private lateinit var mProductViewModel: ProductViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -35,8 +34,7 @@ class ItemListFragment : Fragment() {
             findNavController().navigate(R.id.action_itemListFragment_to_itemListDetailsFragment)
         }
 
-        return  view
+        return view
     }
-
 }
 

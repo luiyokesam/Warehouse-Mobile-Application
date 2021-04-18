@@ -22,19 +22,19 @@ class StockInAdapter: RecyclerView.Adapter<StockInAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = stockinList[position]
-        holder.itemView.txt_rv_stockin_barcode.text = currentItem.barcode.toString()
+        holder.itemView.txt_rv_stockin_barcode.text = currentItem.barcode
         holder.itemView.txt_rv_stockin_quantity.text = currentItem.inquantity.toString()
-        holder.itemView.txt_rv_stockin_date.text = currentItem.indate.toString()
+        holder.itemView.txt_rv_stockin_date.text = currentItem.indate
 
         holder.itemView.stockin_rowlayout.setOnClickListener {
 //            val action = StockInFragmentDirections.actionItemListFragmentToItemListUpdateFragment(currentItem)
-            val action = StockInFragmentDirections.actionStockInFragmentToStockInDetailsFragment(currentItem)
+            val action = StockInFragmentDirections.actionStockInFragmentToStockInTransferFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
         }
     }
 
-    fun setData(product: List<StockIn>){
-        this.stockinList = product
+    fun setData(stockin: List<StockIn>){
+        this.stockinList = stockin
         notifyDataSetChanged()
     }
 
